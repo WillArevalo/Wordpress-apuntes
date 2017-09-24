@@ -1,0 +1,23 @@
+Plugin 
+WooCommerce
+
+WooCommerce es la opción que tiene WordPress para el comercio electrónico. Es una plataforma para poder vender en internet.
+
+Configuraciones que puedes hacer:
+Cambiar el idioma del plugin de WooCommerce.
+Configuraciones geográficas.
+Opciones de moneda.
+Configuraciones de producto.
+Opción de valoraciones de usuario.
+Configuraciones de la página de la tienda.
+Opciones de inventarios.
+Configuraciones de envío.
+Nota: Los botones de la página de configuración no está hechos cono ajax, lo que significa que cada que se cambie de pestaña se deben guardar los cambios ya que al pasar a otra se pueden perder los cambios.
+
+Otras configuraciones que se pueden hacer:
+Opciones para el proceso de finalización de compra.
+Opciones de direcciones de facturación y pedidos.
+Configuraciones para PayPal si es un método que se ha elegido para cobrar.
+Opciones para crear cuentas de usuarios.
+Configuraciones de correos electrónicos para los usuarios y/o nosotros.
+Nota: Los términos y condiciones debemos crearlos de forma legal nosotros, es algo que WooCommerce no hace por nosotros.
