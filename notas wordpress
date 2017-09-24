@@ -1,0 +1,260 @@
+Wordpress:
+Tipos de Usuarios:
+
+Suscriptor: No puede hacer nada solo modificar su propio perfil y seguir el sitio.
+
+Colaborador: Puede crear contenido solo para revisión pero no puede publicarlo y si se publica ya no puede modificarla ni nada.
+
+Autor: Puede crear contenido y publicarlo asi como modificarlo una vez publicado, pero solo su propio contenido.
+
+Editor: Puede crear contenido, publicarlo asi como editar tanto el suyo como el elaborado por los demas. Tiene habilitado casi todo excepto funciones de configuración.
+
+Administrador:Gestiona el sitio completamente, desde entradas hasta configuraciones.
+
+Plugin:
+User Switching 
+-Cambio instantaneo entre cuentas de usuarios
+de Wordpress
+
+
+_____________________________________________
+
+Plugin:
+Simple Membership:
+Protege el contenido para que solo los miembros
+lo vean, contenido de paga.
+
+Restrict content:
+Restringe posts a usuarios dentro de el sistema
+
+_____________________________________________
+Añadir mis propios roles
+
+Se añade en functions.php
+
+<?php
+
+function add_role_viajero()
+{
+    add_role(
+        'viajero',
+        'Viajero',
+        [
+            'read'         => true,
+            'edit_posts'   => true,
+            'upload_files' => true,
+        ]
+    );
+}
+ 
+// add the simple_role
+add_action('init', 'add_role_viajero');
+________________________________________________
+
+Maquetador Visual
+
+Tema Divi: https://www.elegantthemes.com/gallery/divi/
+Plugin Divi: https://www.elegantthemes.com/plugins/divi-builder/
+
+Visual Composer:
+https://codecanyon.net/item/visual-composer-page-builder-for-wordpress/242431
+
+Gutenberg 
+Desde el buscador de plugins
+
+________________________________________________
+Custom Post Types
+
+El plug-in que vamos a utilizar se llama Custom Post Type UI
+
+Aquí encuentras todos los tipos de Post Types que existen.
+https://codex.wordpress.org/Post_Types
+
+Si queremos escribirlo seria en functions.php
+
+function viajes_init() {
+    $labels = array(
+        'name'              => _x( 'Viajes', 'post type general name', 'your-plugin-textdomain' ),
+        'singular_name'     => _x( 'Viajes', 'post type general name', 'your-plugin-textdomain' ),
+        'menu_name'         => _x( 'Mis viajes', 'admin menu', 'your-plugin-textdomain' ),
+        'name_admin_bar'    => _x( 'Viajes', 'add new on admin bar', 'your-plugin-textdomain' ),
+        'add_new'           => _x( 'Añadir nuevo', 'viaje', 'your-plugin-textdomain' ),
+        'add_new_item'      => __( 'Añadir nuevo viaje', 'your-plugin-textdomain' ),
+        'new_item'          => __( 'Nuevo viaje', 'your-plugin-textdomain' ),
+        'edit_item'         => __( 'Editar viaje', 'your-plugin-textdomain' ),
+        'view_item'         => __( 'Ver viaje', 'your-plugin-textdomain' ),
+        'all_items'         => __( 'Todos los viajes', 'your-plugin-textdomain' ),
+        'search_items'      => __( 'Buscar viajes', 'your-plugin-textdomain' ),
+        'parent_item_colon' => __( 'Viajes padre', 'your-plugin-textdomain' ),
+        'not_found'         => __( 'No hemos encontrado viajes.', 'your-plugin-textdomain' ),
+        'not_found_in_trash'=> __( 'No hemos encontrado viajes en la papelera', 'your-plugin-textdomain' ),
+    );
+
+    $args = array(
+        'labels'            => $labels,
+        'description'       => __('Description', 'your-plugin-textdomain'),
+        'public'            => true,
+        'public_queryable'  => true,
+        'show_ui'           => true,
+        'show_in_menu'      => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'viaje' ),
+        'capability_type'   => 'post',
+        'has_archive'       => true,
+        'hierarchical'      => false,
+        'menu_position'     => null,
+        'menu_icon'         => 'dashicons-admin-multisite',
+        'supports'          => array( 'title', 'editor', 'author', 'thumbnail' )
+    );
+
+    register_post_type( 'viaje', $args );
+}
+
+add_action( 'init', 'viajes_init' );
+
+________________________________________________________
+Custom Fields
+
+Plugin
+Advanced Custom Fields
+Esto solo crea campos extra dentro de el editor
+
+Para visualizarlos podemos utilizar:
+Plugin
+advanced-custom-fields-module
+
+________________________________________________________
+Api Rest
+Podemos utilizar el sistema para alimentar podria ser un
+app android
+
+________________________________________________________
+Plugins Basicos:
+
+Jetpack:
+Jetpack es el CDN propio y específico que puede utilizarse para todas las imágenes que se encuentran en el sitio. La ventaja de esto es que le vamos a dar más espacio a nuestro hosting y no lo llenemos de información que podemos alojar en otro lugar.
+El mas completo he indispensable, se puede ajustar para desactivar modulos, o instalar solo los modulos que 
+desees
+
+Manage WP:
+Manage WP, este plugin nos permite conectar con un servicio externo. Si somos desarrolladores y tenemos muchos clientes, seguro esto nos va a venir muy bien, ya que nos va a permitir manejar varios sitios al mismo tiempo.
+Dentro de la interfaz de Manage WP vamos a poder ver la información de los sitios que estamos manejando.
+
+Tambien existen ManageWP
+https://managewp.com/
+
+WPRemote
+https://wpremote.com/
+
+Infinitewp
+http://infinitewp.com/
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _  _ _  _ _ _ 
+Plugins de caché
+Hay muchos tipos de chacé, siempre lo que tenemos que tener en cuenta es que siempre debemos usar uno. Cuando tenemos un proyecto muy grande podemos usar el W3. Sin embargo, si nuestro proyecto no es tan grande podemos instalar WP Rocket caché, el cual baja un poco el nivel de complejidad. De la misma forma, tenemos WP fastest caché o el WP super cache.
+
+W3 Total Cache
+https://es.wordpress.org/plugins/w3-total-cache/
+
+WP Rocket
+https://wp-rocket.me/
+
+Batcache
+https://es.wordpress.org/plugins/batcache/
+
+WP Fastest Cache
+https://es.wordpress.org/plugins/wp-fastest-cache/
+
+WP Super Cache (Recomendando en la clase)
+https://es.wordpress.org/plugins/wp-super-cache/
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _
+Cookie Law Info
+Solo para cumplir con la legislacion
+En Europa sobretodo y en otras partes del mundo tenemos una legislación que nos obliga a mostrar un anuncio que nuestro sitio utiliza cookies. Las cookies siempre las usamos porque lo que hacemos es guardar información del usuario dentro de nuestro sitio.
+
+Really Simple SSL
+Really Simple SSL nos permite pasar de http a https. Esto es relevante porque Google requiere que los sitios web estén protegidos con protocolos de seguridad. Además, esta configuración nos ayuda a que nuestro sitio esté mucho más seguro.
+con el really simple ssl si tenes un certificado gratis como el LET’S encrypt no te cuesta nada. Saludos.}
+
+Cloudfare lleva una funcion por defecto ssl.
+
+
+Yoast SEO
+Este plugin nos ayuda a a organizar nuestra información de manera que aparezca de forma más efectiva en los buscadores. Además, nos va a hacer un análisis de la información que tenemos en nuestro sitio.
+
+Updraft Plus
+Updraft que es un plugin de backup. Este plugin nos permite crear una copia de la información que tenemos en nuestro sitio web, de esta forma lo hacemos mucho más seguro y menos vulnerable.
+
+____________________________________________________________
+Crear plugins:
+
+Se crea una carpeta en el directorio de plugins, y se crea un archivo .php con el mismo nombre, dentro de el
+iria algo mas o menos asi
+
+<?php
+/*
+Plugin Name: Platzi Plugin
+Plugin URI:  https://raven.es/plugins/platziplugin
+Description: Plugin con los elementos extra de Platzi
+Version:     1.0
+Author:      bi0xid
+Author URI:  https://raven.es/
+License:     GPL2
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: platziplugin
+Domain Path: /languages
+*/
+
+function wporg_options_page_html()
+{
+    // check user capabilities
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    ?>
+    <div class="wrap">
+        <h1><?= esc_html(get_admin_page_title()); ?></h1>
+        <form action="" method="post">
+            <?php
+            // output security fields for the registered setting "wporg_options"
+            settings_fields('wporg_options');
+            // output setting sections and their fields
+            // (sections are registered for "wporg", each field is registered to a specific section)
+            do_settings_sections('wporg');
+            // output save settings button
+            submit_button('Save Settings');
+            ?>
+        </form>
+    </div>
+    <?php
+}
+function wporg_options_page()
+{
+    add_menu_page(
+        'WPOrg',
+        'WPOrg Options',
+        'manage_options',
+        'wporg',
+        'wporg_options_page_html',
+        '',
+        20
+    );
+}
+add_action('admin_menu', 'wporg_options_page');
+
+function register_mysettings() { // whitelist options
+  register_setting( 'wporg_options', 'new_option_name' );
+  register_setting( 'wporg_options', 'some_other_option' );
+  register_setting( 'wporg_options', 'option_etc' );
+}
+
+
+
+
+Plugin
+
+Post Expirator
+En proyectos como el nuestro seguro hay entradas que tienen una fecha de caducidad, como eventos que ya no tienen validez o cosas que caducan. Para este tipo de casos existe un plugin que podemos usar para despublicar entradas. El nombre del plugin es Post Expirator, lo podemos descargar e instalar en nuestro sitio.
+Con este plugin vamos a poder modificar los estados de las entradas que creamos, esto quiere decir que lo podemos borrar, o lo podemos ocultar, etc.
+
